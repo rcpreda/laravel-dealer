@@ -16,9 +16,7 @@ Route::get('admin/auth/logout', ['as' => 'admin.logout', 'uses' =>'Auth\AuthCont
 Route::get('admin/auth/login', ['as' => 'admin.login.get', 'uses' => 'Auth\AuthController@getLogin' ]);
 Route::post('admin/auth/login', ['as' => 'admin.login.post', 'uses' => 'Auth\AuthController@postLogin' ]);
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function() {
-    //Route::get('/', ['as' => 'admin.index', 'uses' => 'Admin\AdminController@index']);
-    //Route::get('/alfa', ['as' => 'admin.alfa', 'uses' => 'Admin\AdminController@alfa']);
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'acl']], function() {
     Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashboardController@index']);
     Route::resource('permissions', 'PermissionsController');
 });
