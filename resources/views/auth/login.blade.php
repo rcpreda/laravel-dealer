@@ -2,7 +2,7 @@
 
     <div class="col-md-6 col-md-offset-3">
 
-        @include('errors.forms')
+        @include('partials.forms')
 
         <form method="post" action="{{ route('admin.login.post') }}" >
             {!! csrf_field() !!}

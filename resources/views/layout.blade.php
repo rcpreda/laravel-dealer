@@ -37,8 +37,10 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     @if(Auth::check())
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
+                        <li class="active"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                        @can('admin.permissions.index')
+                            <li><a href="{{ route('admin.permissions.store') }}">Permissions</a></li>
+                        @endcan
                         <li><a href="#contact">Contact</a></li>
                     @endif
                 </ul>
@@ -56,6 +58,9 @@
 
 
     <div class="container">
+
+        @include('partials.flash')
+
         @yield('content')
     </div>
 
