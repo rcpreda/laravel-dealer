@@ -20,5 +20,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function() {
     //Route::get('/', ['as' => 'admin.index', 'uses' => 'Admin\AdminController@index']);
     //Route::get('/alfa', ['as' => 'admin.alfa', 'uses' => 'Admin\AdminController@alfa']);
     Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashboardController@index']);
-    //Route::resource('product', 'ProductController');
+    Route::resource('permissions', 'PermissionsController');
 });
