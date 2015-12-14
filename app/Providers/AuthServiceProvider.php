@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use Schema;
+use Config;
+use Log;
+use App\Entities\Permission;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -25,19 +29,14 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(GateContract $gate)
     {
         $this->registerPolicies($gate);
-
         $permissions = $this->getPermissions();
         if ($permissions) {
             foreach ($this->getPermissions() as $permission) {
-
-                if ($gate->has($permission->slug))
-                    continue;
                 $gate->define($permission->slug, function ($user) use ($permission) {
                     return $permission->roles->contains($user->role_id);
                 });
             }
         }
-
     }
 
     /**
@@ -45,7 +44,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected function getPermissions()
     {
-        if (!Schema::hasTable(Config::get('acl.permissions_table_name')) || !Schema::hasTable(Config::get('auth.table')))
+        if (!Schema::hasTable(Config::get('acl.permissions_table')) || !Schema::hasTable(Config::get('auth.table')))
             return null;
 
         $permissions = Permission::with('roles')->get();
