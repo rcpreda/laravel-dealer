@@ -33,5 +33,10 @@ class PermissionsTableSeeder extends Seeder
             'slug' => "admin.permissions.edit",
         ]);
 
+        Permission::create([
+            'name' => "Dashboard Index",
+            'slug' => "admin.dashboard",
+        ]);
+
     }
 }
