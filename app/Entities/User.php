@@ -2,6 +2,8 @@
 
 namespace App\Entities;
 
+
+use Config;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
