@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', ['as' => 'welcome', 'uses' => 'WelcomeController@index']);
+Route::get('admin/auth/logout', ['as' => 'admin.logout', 'uses' =>'Auth\AuthController@getLogout']);
+Route::get('admin/auth/login', ['as' => 'admin.login.get', 'uses' => 'Auth\AuthController@getLogin' ]);
+Route::post('admin/auth/login', ['as' => 'admin.login.post', 'uses' => 'Auth\AuthController@postLogin' ]);
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function() {
+    //Route::get('/', ['as' => 'admin.index', 'uses' => 'Admin\AdminController@index']);
+    //Route::get('/alfa', ['as' => 'admin.alfa', 'uses' => 'Admin\AdminController@alfa']);
+    Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashboardController@index']);
+    //Route::resource('product', 'ProductController');
 });
