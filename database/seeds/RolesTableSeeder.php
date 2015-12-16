@@ -24,11 +24,13 @@ class RolesTableSeeder extends Seeder
         $permission3 = Permission::find(3);
         $permission4 = Permission::find(4);
         $permission5 = Permission::find(5);
+        $permission6 = Permission::find(6);
         $admin->assign($permission1);
         $admin->assign($permission2);
         $admin->assign($permission3);
         $admin->assign($permission4);
         $admin->assign($permission5);
+        $admin->assign($permission6);
 
         Role::create([
             'name' => "staff",
