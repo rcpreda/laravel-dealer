@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+/**
+ * TODO - implement UI permission handler
+ * Class PermissionsController
+ * @package App\Http\Controllers
+ */
 class PermissionsController extends Controller
 {
     /**
@@ -16,7 +21,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        //
+        return view('permissions.index');
     }
 
     /**
@@ -26,7 +31,7 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('permissions.index');
     }
 
     /**
@@ -37,7 +42,7 @@ class PermissionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return view('permissions.store');
     }
 
     /**
@@ -48,7 +53,7 @@ class PermissionsController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('permissions.show', compact('id'));
     }
 
     /**
@@ -60,6 +65,8 @@ class PermissionsController extends Controller
     public function edit($id)
     {
         //
+        var_dump(__METHOD__);
+        return view('permissions.edit', compact('id'));
     }
 
     /**
@@ -72,6 +79,7 @@ class PermissionsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        return view('permissions.update', compact('id'));
     }
 
     /**
@@ -82,6 +90,7 @@ class PermissionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        var_dump('Delete: ' . $id);die;
+        return view('permissions.destroy', compact('id'));
     }
 }

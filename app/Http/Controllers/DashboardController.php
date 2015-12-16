@@ -15,10 +15,4 @@ class DashboardController extends Controller
         return view('dashboard.index');
     }
 
-    public function store()
-    {
-        echo '<h3>sdfsd</h3>';
-        return view('admin.index');
-    }
-
 }
