@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', ['as' => 'welcome', 'uses' => 'WelcomeController@index']);
+Route::get('/', ['as' => 'welcome', 'uses' => 'Common\WelcomeController@index']);
 Route::get('admin/auth/logout', ['as' => 'admin.logout', 'uses' =>'Auth\AuthController@getLogout']);
 Route::get('admin/auth/login', ['as' => 'admin.login.get', 'uses' => 'Auth\AuthController@getLogin' ]);
 Route::post('admin/auth/login', ['as' => 'admin.login.post', 'uses' => 'Auth\AuthController@postLogin' ]);
