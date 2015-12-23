@@ -31,3 +31,12 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
  - npm install jquery --save
  - npm install babel-preset-es2015 --save
  - npm install babel-preset-react --save
+
+ - chmod -R 777 storage/
+ - cp .env.example .env
+ - update users/password_reset table name in config/auth
+ - update migration table name table in config/auth
+ - prepare acl tables
+ - composer install
+ - php artisan key:generate
+ - php artisan migrate

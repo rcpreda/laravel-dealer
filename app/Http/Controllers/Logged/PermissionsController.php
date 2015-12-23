@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
  * Class PermissionsController
  * @package App\Http\Controllers
  */
-class PermissionsController extends Controller
+class PermissionsController extends LoggedController
 {
     /**
      * Display a listing of the resource.

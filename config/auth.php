@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'table' => 'admin_users',
+    'table' => 'dealers_users',
 
     /*
     |--------------------------------------------------------------------------
@@ -60,7 +60,7 @@ return [
 
     'password' => [
         'email'  => 'emails.password',
-        'table'  => 'password_resets',
+        'table'  => 'dealer_password_resets',
         'expire' => 60,
     ],
 

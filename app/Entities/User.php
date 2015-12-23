@@ -51,4 +51,9 @@ class User extends Model implements AuthenticatableContract,
         $this->table = Config::get('auth.table');
     }
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
 }

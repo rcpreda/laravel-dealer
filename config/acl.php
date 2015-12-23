@@ -3,9 +3,9 @@
 
 return [
 
-    'roles_table' => 'roles',
-    'permissions_table' => 'permissions',
-    'permissions_roles_table' => 'permission_role',
+    'roles_table' => 'dealer_roles',
+    'permissions_table' => 'dealer_permissions',
+    'permissions_roles_table' => 'dealer_permission_role',
 
 ];
 

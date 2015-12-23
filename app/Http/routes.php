@@ -17,6 +17,6 @@ Route::get('admin/auth/login', ['as' => 'admin.login.get', 'uses' => 'Auth\AuthC
 Route::post('admin/auth/login', ['as' => 'admin.login.post', 'uses' => 'Auth\AuthController@postLogin' ]);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'acl']], function() {
-    Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashboardController@index']);
-    Route::resource('permissions', 'PermissionsController');
+    Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'Logged\DashboardController@index']);
+    Route::resource('permissions', 'Logged\PermissionsController');
 });

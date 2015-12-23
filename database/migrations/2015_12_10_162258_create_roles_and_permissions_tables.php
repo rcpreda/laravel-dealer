@@ -36,12 +36,12 @@ class CreateRolesAndPermissionsTables extends Migration
 
             $table->foreign('permission_id')
                 ->references('id')
-                ->on('permissions')
+                ->on(Config::get('acl.permissions_table'))
                 ->onDelete('cascade');
 
             $table->foreign('role_id')
                 ->references('id')
-                ->on('roles')
+                ->on(Config::get('acl.roles_table'))
                 ->onDelete('cascade');
         });
 
