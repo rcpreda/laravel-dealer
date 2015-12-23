@@ -29,6 +29,12 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(GateContract $gate)
     {
         $this->registerPolicies($gate);
+
+        $gate->before( function($user){
+            if ($user->role_id = 1)
+                return true;
+        });
+
         $permissions = $this->getPermissions();
         if ($permissions) {
             foreach ($this->getPermissions() as $permission) {
