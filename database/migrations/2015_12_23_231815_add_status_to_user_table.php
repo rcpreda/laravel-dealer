@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRoleToUserTable extends Migration
+class AddStatusToUserTable extends Migration
 {
     /**
      * Command php artisan make:migration add_role_to_user_table --table=users
@@ -16,7 +16,7 @@ class AddRoleToUserTable extends Migration
     {
         Schema::table(Config::get('auth.table'), function (Blueprint $table) {
             //
-            $table->integer('role_id')->after('email')->unsigned();
+            $table->integer('status')->after('email')->default(0);
         });
     }
 
@@ -29,7 +29,7 @@ class AddRoleToUserTable extends Migration
     {
         Schema::table(Config::get('auth.table'), function (Blueprint $table) {
             //
-            $table->dropColumn('role_id');
+            $table->dropColumn('status');
         });
     }
 }
