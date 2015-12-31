@@ -19,4 +19,12 @@ Route::post('admin/auth/login', ['as' => 'admin.login.post', 'uses' => 'Auth\Aut
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'acl']], function() {
     Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'Logged\DashboardController@index']);
     Route::resource('permissions', 'Logged\PermissionsController');
+    Route::resource('car', 'Logged\Dealer\CarController');
+
+});
+
+Route::group(['prefix' => 'admin/ajax', 'middleware' => ['auth']], function() {
+    Route::get('car-make', ['as' => 'admin.ajax.car.make', 'uses' => 'Logged\Dealer\CarController@getAjaxMake']);
+    Route::post('car-models/{manufacturer}', ['as' => 'admin.ajax.car.models', 'uses' => 'Logged\Dealer\CarController@getAjaxModels']);
+    Route::post('car-engines', ['as' => 'admin.ajax.car.engines', 'uses' => 'Logged\Dealer\CarController@getAjaxEngines']);
 });
