@@ -4,7 +4,6 @@ $.ajaxSetup({
     }
 });
 
-
 (function( $ ) {
     $.widget( "custom.combobox", {
         _create: function() {
@@ -43,7 +42,9 @@ $.ajaxSetup({
                     });
                 },
 
-                autocompletechange: "_removeIfInvalid"
+                autocompletechange: function(event, ui) {
+                    this._removeIfInvalid(event, ui);
+                }
             });
         },
 
@@ -96,60 +97,49 @@ $.ajaxSetup({
         _removeIfInvalid: function( event, ui ) {
 
             // Selected an item, nothing to do
-            //if ( ui.item ) {
-            //    return;
-            //}
-            //
-            //// Search for a match (case-insensitive)
-            //var value = this.input.val(),
-            //    valueLowerCase = value.toLowerCase(),
-            //    valid = false;
-            //this.element.children( "option" ).each(function() {
-            //    if ( $( this ).text().toLowerCase() === valueLowerCase ) {
-            //        this.selected = valid = true;
-            //        return false;
-            //    }
-            //});
-            //
-            //// Found a match, nothing to do
-            //if ( valid ) {
-            //    return;
-            //}
+            if ( ui.item ) {
+                return;
+            }
+
+            // Search for a match (case-insensitive)
+            var value = this.input.val(),
+                valueLowerCase = value.toLowerCase(),
+                valid = false;
+            this.element.children( "option" ).each(function() {
+                if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+                    this.selected = valid = true;
+                    return false;
+                }
+            });
+
+            // Found a match, nothing to do
+            if ( valid ) {
+                return;
+            }
 
             // Remove invalid value
-            //this.input
-            //    .val( "" )
-            //    .attr( "title", value + " didn't match any item" )
-            //    .tooltip( "open" );
-            //this.element.val( "" );
-            //this._delay(function() {
-            //    this.input.tooltip( "close" ).attr( "title", "" );
-            //}, 2500 );
-            this.input.autocomplete( "instance" ).term = "";
+            this.input
+                .val( "" )
+                .attr( "title", value + " didn't match any item" )
+                .tooltip( "open" );
+            this.element.val( "" );
+            this._delay(function() {
+                this.input.tooltip( "close" ).attr( "title", "" );
+            }, 2500 );
+
+            this._trigger( "onRemoveIfInvalid", event);
         },
 
         _destroy: function() {
             this.wrapper.remove();
             this.element.show();
-        },
-
+        }
     });
+
+
+
+
 })( jQuery );
-
-
-var getCarModels = function(value) {
-    var url = "/admin/dealer-ajax-car-models/" + value + "/";
-    $.ajax({
-        type: 'POST',
-        dataType: 'html',
-        data: {token: 'test'},
-        url: url
-    }).done(function(result) {
-        $('.model-engine-partial').html(result);
-    }).error(function(result) {
-        $('.model-engine-partial').html(result);
-    });
-}
 
 $( document ).ready(function() {
     //console.log('this is main');

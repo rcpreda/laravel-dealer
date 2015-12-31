@@ -5767,4 +5767,17 @@ body {
   margin: 0;
   padding: 5px 10px; }
 
+.bs-example-tabs .nav-tabs {
+  margin-bottom: 20px; }
+
+.tab-pane {
+  margin-top: 20px; }
+
+.custom-combobox a.ui-button {
+  position: absolute; }
+
+.custom-combobox .ui-state-default {
+  background-image: none;
+  background-color: white; }
+
 /*# sourceMappingURL=app.css.map */
