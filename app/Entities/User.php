@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 
+use App\Entities\Dealer\Site;
 use Config;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -54,6 +55,14 @@ class User extends Model implements AuthenticatableContract,
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function site()
+    {
+        return $this->hasOne(Site::class, 'dealer_user_id');
     }
 
 }
