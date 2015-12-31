@@ -13,4 +13,6 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    RewriteRule ^/?(.+)\.(jpg|jpeg|gif|png)$ serve.php?file=$1.$2&type=image
 </IfModule>

@@ -8,6 +8,7 @@
     "babel-preset-react": "^6.3.13",
     "bootstrap-sass": "^3.0.0",
     "jquery": "^2.1.4",
+    "jquery-ui": "^1.10.5",
     "laravel-elixir": "^4.0.0"
   }
 }
