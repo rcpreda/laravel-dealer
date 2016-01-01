@@ -2,6 +2,7 @@
 
 namespace App\Entities\Engine;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
@@ -60,7 +61,6 @@ class Manufacturer extends Model
         return $this->hasOne(\App\Entities\Engine\Cost::class);
     }
 
-
     /**
      * @param $query
      * @return array $manufacturersAsArray
@@ -88,32 +88,41 @@ class Manufacturer extends Model
         return $query->where('status', '=', 1);
     }
 
-
     /**
-     * @param $query
-     * @return mixed
+     * @param \Illuminate\Database\Query\Builder $query
+     * @return \Illuminate\Database\Query\Builder $query
      */
-    public function scopeFilterByCarModel($query, Request $request)
+    public function scopeSelectByFuelAndCarMake($query, Request $request)
     {
         $manufacturerId = (int) $request->get('make');
         $fuelId = (int) $request->get('fuel');
         $year = (int) $request->get('year');
         $query->select(["ce.*", "c.co2 as emission"])
             ->join('car_type_fuel as f', 'ce.fuel_type_id', '=', 'f.id')
-              ->leftJoin('car_engine_costs as c', 'ce.id', '=', 'c.engine_id')
+            ->leftJoin('car_engine_costs as c', 'ce.id', '=', 'c.engine_id')
             ->where('ce.status', '=', 1)
             ->where('ce.manufacturer_id', '=', $manufacturerId)
             ->where('ce.fuel_type_id', '=', $fuelId);
 
-        $result = $query->get(['ce.*', 'f.*', 'c.*']);
+        return $query;
+    }
+
+    /**
+     * @param \Illuminate\Database\Query\Builder $query
+     * @return array
+     */
+    public function scopeAsArrayFilter($query)
+    {
+        $result = $query->get();
         if ($result->isEmpty())
-            return FALSE;
+            throw new QueryException('Please define a car engine before posting a car!');
 
         $array = ['select' => ''];
-        foreach($result as $engine){
-            $array[$engine->id] = sprintf("%s-%s(%s)%s", $engine->code, $engine->size, $engine->power, $engine->emission);
+        foreach($result as $engine) {
+            $array[$engine->id] = sprintf("%s-%s(%s)-%s", $engine->code, $engine->size, $engine->power, $engine->emission);
         }
-       return $array;
+
+        return $array;
     }
 
 }

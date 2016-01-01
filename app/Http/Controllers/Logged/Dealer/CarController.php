@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Logged\Dealer;
 
 use App\Entities\Car\Model;
 use App\Entities\Type\Fuel;
+use Illuminate\Database\QueryException;
 use Response;
 use Illuminate\Support\Str;
 use App\Entities\Car\Manufacturer;
@@ -138,7 +139,12 @@ class CarController extends LoggedController
     public function getAjaxEngines(Request $request)
     {
         if ($request->ajax()) {
-            $engines = Engine::filterByCarModel($request);
+            try {
+                $engines = Engine::selectByFuelAndCarMake($request)->asArrayFilter();
+            } catch (QueryException $e) {
+
+            }
+
             return \View::make('logged.dealer.cars.partials.engines', compact('engines'));
         }
     }
