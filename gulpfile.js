@@ -21,6 +21,6 @@ elixir(function(mix) {
          'smoothness/jquery-ui.min.css'
      ], 'public/css/all.css')
      .scripts([
-         'main.js'
+         'main.js', 'dropzone.js'
      ]);
 });

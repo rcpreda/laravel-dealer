@@ -25,7 +25,7 @@
                 <div role="tabpanel" class="tab-pane active" id="home">
                     <div class="row">
 
-                        <div class="col-md-4 text-left">
+                        <div class="col-md-3 text-left">
 
                             <div class="form-group">
                                 {!! Form::label('manufacturer_id', 'Car Manufacturer:', ['class' => 'control-label']) !!}
@@ -75,6 +75,26 @@
                             </div>-->
 
                         </div>
+
+                        <div class="col-md-3 text-left">
+
+                            <div class="form-group">
+                                {!! Form::label('title', 'Title:', ['class' => 'control-label']) !!}
+                                {!! Form::text('title', old('title'), ['class' => 'form-control']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('description', 'Description:', ['class' => 'control-label']) !!}
+                                {!! Form::textarea('description', old('description'), ['size' => '35x5', 'class' => 'control-label']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('millage', 'Millage:', ['class' => 'control-label']) !!}
+                                {!! Form::text('millage', old('millage'), ['class' => 'form-control']) !!}
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="profile">.sdfsdfs</div>
