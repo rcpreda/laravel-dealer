@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Entities\Engine\Manufacturer as Engine;
+
 class CarController extends LoggedController
 {
     /**
@@ -23,12 +25,6 @@ class CarController extends LoggedController
      */
     public function index()
     {
-        //var_dump($this->user->site->name);//die;
-
-
-        //var_dump(count($models));
-        //    die;
-
         $cars = Car::paginate();
         return view('logged.dealer.cars.index', compact('cars'));
 
@@ -39,20 +35,14 @@ class CarController extends LoggedController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-
         $manufacturers = Manufacturer::statusEnabled()->toOptionArray();
         $fuelTypes = Fuel::toOptionArray();
-        //var_dump(date('Y'));
-        //die;
-
         $years = ['select' => ''];
         for($i = 1950; $i <= date('Y') ; $i++) {
             $years[$i] = $i;
         }
-
-
         return view('logged.dealer.cars.create', compact('manufacturers', 'fuelTypes', 'years' ));
     }
 
@@ -138,6 +128,18 @@ class CarController extends LoggedController
             $modelsCollection = Model::findByManufacturerId($manufacturer);
             $models = Model::toOptionArray($modelsCollection);
             return \View::make('logged.dealer.cars.partials.models', compact('models'));
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getAjaxEngines(Request $request)
+    {
+        if ($request->ajax()) {
+            $engines = Engine::filterByCarModel($request);
+            return \View::make('logged.dealer.cars.partials.engines', compact('engines'));
         }
     }
 }
