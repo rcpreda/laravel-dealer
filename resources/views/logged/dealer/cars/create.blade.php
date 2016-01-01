@@ -25,74 +25,90 @@
                 <div role="tabpanel" class="tab-pane active" id="home">
                     <div class="row">
 
-                        <div class="col-md-3 text-left">
 
-                            <div class="form-group">
-                                {!! Form::label('manufacturer_id', 'Car Manufacturer:', ['class' => 'control-label']) !!}
-                                <div class="ui-widget">
-                                {!! Form::select('manufacturer_id', $manufacturers, old('manufacturer_id') ? old('manufacturer_id') : 'select', ['class' => 'form-control', 'id'=>'combobox']) !!}
-                                </div>
-                            </div>
+                        <div class="col-sm-6">
 
-                            <div class="model-engine-partial">
+                            <div class="row">
+                                <div class="col-xs-8 col-sm-6 text-left">
 
-                            </div>
-
-                            <div class="car-data" style="display: none">
-                                <div class="form-group" >
-
-                                    {!! Form::label('type_fuel_id', 'Fuel Type:', ['class' => 'control-label']) !!}
-                                    <div class="ui-widget">
-                                        {!! Form::select('type_fuel_id', $fuelTypes, old('fuel_type_id') ? old('fuel_type_id') : 'select', ['class' => 'form-control', 'id'=>'fuel-combobox']) !!}
+                                    <div class="form-group">
+                                        {!! Form::label('manufacturer_id', 'Car Manufacturer:', ['class' => 'control-label']) !!}
+                                        <div class="ui-widget">
+                                            {!! Form::select('manufacturer_id', $manufacturers, old('manufacturer_id') ? old('manufacturer_id') : 'select', ['class' => 'form-control', 'id'=>'combobox']) !!}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
+                                    <div class="model-engine-partial">
 
-                                    {!! Form::label('year', 'Year:', ['class' => 'control-label']) !!}
-                                    <div class="ui-widget">
-                                        {!! Form::select('year', $years, old('year') ? old('year') : 'select', ['class' => 'form-control', 'id'=>'year-combobox']) !!}
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="engines-partial">
+                                    <div class="car-data" style="display: none">
+                                        <div class="form-group" >
 
-                            </div>
+                                            {!! Form::label('type_fuel_id', 'Fuel Type:', ['class' => 'control-label']) !!}
+                                            <div class="ui-widget">
+                                                {!! Form::select('type_fuel_id', $fuelTypes, old('fuel_type_id') ? old('fuel_type_id') : 'select', ['class' => 'form-control', 'id'=>'fuel-combobox']) !!}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            {!! Form::label('year', 'Year:', ['class' => 'control-label']) !!}
+                                            <div class="ui-widget">
+                                                {!! Form::select('year', $years, old('year') ? old('year') : 'select', ['class' => 'form-control', 'id'=>'year-combobox']) !!}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="engines-partial">
+
+                                    </div>
 
 
-                            <!--{!! Form::label('type_fuel_id', 'Fuel Type:', ['class' => 'control-label']) !!}
-                            {!! Form::select('type_fuel_id', $fuelTypes, old('type_fuel_id') ? old('type_fuel_id') : 'select', ['class' => 'form-control', 'id' => 'car-type-fuel']) !!}-->
+                                    <!--{!! Form::label('type_fuel_id', 'Fuel Type:', ['class' => 'control-label']) !!}
+                                    {!! Form::select('type_fuel_id', $fuelTypes, old('type_fuel_id') ? old('type_fuel_id') : 'select', ['class' => 'form-control', 'id' => 'car-type-fuel']) !!}-->
 
-                            <!--<div class="form-group">
+                                    <!--<div class="form-group">
                                 {!! Form::label('car_engine', 'Engine:', ['class' => 'control-label']) !!}
-                                {!! Form::text('engine_id', old('car_model'), ['class' => 'form-control', 'id'=> 'model-autocomplete', 'disabled'=> 'disabled']) !!}
+                                    {!! Form::text('engine_id', old('car_model'), ['class' => 'form-control', 'id'=> 'model-autocomplete', 'disabled'=> 'disabled']) !!}
+                                            </div>
+
+                                            <div class="form-group">
+                                                {!! Form::label('order', 'Car Option Order:', ['class' => 'control-label']) !!}
+                                    {!! Form::text('order', old('order') , ['class' => 'form-control']) !!}
+                                            </div>-->
+
+                                </div>
+
+                                <div class="col-xs-8 col-sm-6 text-left">
+
+                                    <div class="form-group">
+                                        {!! Form::label('title', 'Title:', ['class' => 'control-label']) !!}
+                                        {!! Form::text('title', old('title'), ['class' => 'form-control']) !!}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {!! Form::label('description', 'Description:', ['class' => 'control-label']) !!}
+                                        {!! Form::textarea('description', old('description'), ['size' => '35x5', 'class' => 'control-label']) !!}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {!! Form::label('millage', 'Millage:', ['class' => 'control-label']) !!}
+                                        {!! Form::text('millage', old('millage'), ['class' => 'form-control']) !!}
+                                    </div>
+
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                {!! Form::label('order', 'Car Option Order:', ['class' => 'control-label']) !!}
-                                {!! Form::text('order', old('order') , ['class' => 'form-control']) !!}
-                            </div>-->
+                            <div class="col-sm-6">
+                                {!! Form::submit('Add Car', ['class' => 'btn btn-primary']) !!}
+                                {!! Form::close() !!}
+                            </div>
 
                         </div>
 
-                        <div class="col-md-3 text-left">
-
-                            <div class="form-group">
-                                {!! Form::label('title', 'Title:', ['class' => 'control-label']) !!}
-                                {!! Form::text('title', old('title'), ['class' => 'form-control']) !!}
-                            </div>
-
-                            <div class="form-group">
-                                {!! Form::label('description', 'Description:', ['class' => 'control-label']) !!}
-                                {!! Form::textarea('description', old('description'), ['size' => '35x5', 'class' => 'control-label']) !!}
-                            </div>
-
-                            <div class="form-group">
-                                {!! Form::label('millage', 'Millage:', ['class' => 'control-label']) !!}
-                                {!! Form::text('millage', old('millage'), ['class' => 'form-control']) !!}
-                            </div>
-
+                        <div class="col-md-6 text-left">
+                            <form action="tets" method="POST" class="dropzone"></form>
                         </div>
 
                     </div>
@@ -103,10 +119,9 @@
             </div>
 
         </div>
-        <div class="col-md-12">
-            {!! Form::submit('Add Car', ['class' => 'btn btn-primary']) !!}
-            {!! Form::close() !!}
-        </div>
+
+
+
 
 
     </div>
