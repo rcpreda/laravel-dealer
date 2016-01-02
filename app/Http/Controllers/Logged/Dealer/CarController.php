@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Logged\Dealer;
 
 
 use App\Entities\Car\Model;
+use App\Entities\Type\Color;
+use App\Entities\Type\Condition;
 use App\Entities\Type\Fuel;
 use Illuminate\Database\QueryException;
 use Response;
+use Flash;
+use Redirect;
 use Illuminate\Support\Str;
 use App\Entities\Car\Manufacturer;
 use App\Entities\Dealer\Car;
@@ -36,7 +40,7 @@ class CarController extends LoggedController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         $manufacturers = Manufacturer::statusEnabled()->toOptionArray();
         $fuelTypes = Fuel::toOptionArray();
@@ -44,7 +48,11 @@ class CarController extends LoggedController
         for($i = 1950; $i <= date('Y') ; $i++) {
             $years[$i] = $i;
         }
-        return view('logged.dealer.cars.create', compact('manufacturers', 'fuelTypes', 'years' ));
+        //$extra = ['manufacturer_id' => 1, 'model_id' => 1];
+        $extra = [];
+        $colors = Color::statusEnabled()->toOptionArray();
+        $conditions = Condition::statusEnabled()->toOptionArray();
+        return view('logged.dealer.cars.create', compact('manufacturers', 'fuelTypes', 'years', 'extra', 'colors', 'conditions' ));
     }
 
     /**
@@ -53,9 +61,21 @@ class CarController extends LoggedController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\Car\CreateRequest $request)
     {
-        var_dump($request->all());die;
+        try {
+            Car::create($request->all());
+            Flash::success('Car successfully added!');
+        } catch (QueryException $e) {
+            $error_code = $e->errorInfo[1];
+            if($error_code == 1062){
+                Flash::error('Duplicate entry problem! Car engine code has to be unique!');
+            }
+        } catch (\Exception $e) {
+            Flash::error($e->getMessage());
+        }
+
+        return Redirect::route('admin.car.index');
     }
 
     /**
@@ -128,7 +148,11 @@ class CarController extends LoggedController
         if ($request->ajax() && $manufacturer) {
             $modelsCollection = Model::findByManufacturerId($manufacturer);
             $models = Model::toOptionArray($modelsCollection);
-            return \View::make('logged.dealer.cars.partials.models', compact('models'));
+            $model = 'select';
+            if ($request->get('model')){
+                $model = (int) $request->get('model');
+            }
+            return \View::make('logged.dealer.cars.partials.models', compact('models', 'model'));
         }
     }
 

@@ -26,12 +26,12 @@
                     @foreach($cars as $car)
                         <tr>
                             <td>{{$car->id}}</td>
-                            <td>{{$car->name}}</td>
-                            <td>{{$car->type->name}}</td>
-                            <td>{{$car->label}}</td>
-                            <td>{{$car->value}}</td>
+                            <td>{{$car->title}}</td>
+
+                            <td>{{$car->manufacturer->name}}</td>
+                            <td>{{$car->fuel->name}}</td>
                             <td>{{$car->order}}</td>
-                            <td>{{ App\Entities\Car\Option::$statuses[$car->status] }}</td>
+
                             <td>{{$car->created_at}}</td>
                             <td>{{$car->updated_at}}</td>
                             @can('admin.car.edit')

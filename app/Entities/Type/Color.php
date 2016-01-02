@@ -16,4 +16,6 @@ class Color extends MainTypeModel
     protected $fillable = [
         'name', 'alias', 'code', 'status', 'order'
     ];
+
+
 }

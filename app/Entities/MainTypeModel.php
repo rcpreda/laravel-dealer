@@ -24,4 +24,23 @@ class MainTypeModel extends Model
         return $query->where('status', '=', 1);
     }
 
+    /**
+     * @param $query
+     * @return array $manufacturersAsArray
+     * @throws \Exception
+     */
+    public function scopeToOptionArray($query)
+    {
+        $types = $query->get(['id', 'name']);
+        if ($types->isEmpty())
+            throw new \Exception('Please add a fuel type first!');
+
+        $typeAsArray = ['select' => ''];
+        foreach ($types as $type) {
+            $typeAsArray[$type->id] =  $type->name;
+        }
+
+        return $typeAsArray;
+    }
+
 }
